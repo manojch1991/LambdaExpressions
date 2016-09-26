@@ -1,0 +1,25 @@
+<project name="CS681-HW3" default="run" basedir=".">
+	<property name="src.dir" value="src" />
+	<property name="bin.dir" value="bin" />
+
+	<path id="project.classpath">
+		<pathelement location="${bin.dir}" />
+	</path>
+
+	<target name="clean">
+		<delete dir="${bin.dir}" />
+	</target>
+
+	<target name="compile" depends="clean" >
+		<mkdir dir="${bin.dir}" />
+		<javac includeantruntime="false" srcdir="${src.dir}" debug="on" destdir="${bin.dir}" classpathref="project.classpath"/>
+	</target>
+
+	<target name="build" depends="compile" />
+	
+	<target name="run" depends="clean,compile,build">
+		<java fork="true" classname="com.hw.TestClass" failonerror="true" dir="${basedir}">
+			<classpath refid="project.classpath" /> 
+		</java>
+	</target>
+</project>
